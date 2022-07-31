@@ -41,5 +41,7 @@ public class Student implements Serializable, BeanNameAware, ApplicationContextA
 
     }
 
-
+    public void setApplicationContext(ApplicationContext applicationContext) {
+        this.applicationContext = applicationContext;
+    }
 }

@@ -6,7 +6,7 @@ import java.util.concurrent.locks.ReentrantLock;
 
 public class SyncCount {
 
-    private int num = 0;
+    private volatile int num = 0;
 
     private Lock lock = new ReentrantLock(true);
 
