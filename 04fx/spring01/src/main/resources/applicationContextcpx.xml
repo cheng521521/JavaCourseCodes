@@ -9,4 +9,5 @@
         <property name="age" value="22"></property>
         <property name="name" value="程鹏祥XML"></property>
     </bean>
+    <bean id="userDao" class="io.kimmking.homework.mybatis.RegisterBeanFactory"></bean>
 </beans>
