@@ -8,7 +8,7 @@
 
 > Week01 作业题目：
 
-1.（选做）自己写一个简单的 Hello.java，里面需要涉及基本类型，四则运行，if 和 for，然后自己分析一下对应的字节码，有问题群里讨论。
+1.（必做）自己写一个简单的 HelloNum.java，里面需要涉及基本类型，四则运行，if 和 for，然后自己分析一下对应的字节码，有问题群里讨论。
 
 2.（必做）自定义一个 Classloader，加载一个 Hello.xlass 文件，执行 hello 方法，此文件内容是一个 Hello.class 文件所有字节（x=255-x）处理后的文件。文件群里提供。
 
@@ -25,13 +25,13 @@
 ## 操作步骤
 
 
-### 作业1（选做）
+### 作业1（必做）
 
-1. 编写代码, 根据自己的意愿随意编写, 可参考: [Hello.java](./Hello.java)
-2. 编译代码, 执行命令： `javac -g Hello.java`
+1. 编写代码, 根据自己的意愿随意编写, 可参考: [HelloNum.java](./HelloNum.java)
+2. 编译代码, 执行命令： `javac -g HelloNum.java`
 3. 查看反编译的代码。
-  - 3.1 可以安装并使用idea的jclasslib插件, 选中 [Hello.java](./Hello.java) 文件, 选择 `View --> Show Bytecode With jclasslib` 即可。
-  - 3.2 或者直接通过命令行工具 javap, 执行命令: `javap -v Hello.class`
+  - 3.1 可以安装并使用idea的jclasslib插件, 选中 [HelloNum.java](./HelloNum.java) 文件, 选择 `View --> Show Bytecode With jclasslib` 即可。
+  - 3.2 或者直接通过命令行工具 javap, 执行命令: `javap -v HelloNum.class`
 4. 分析相关的字节码。【此步骤需要各位同学自己进行分析】
 
 
@@ -112,6 +112,36 @@ java -Xmx2g -Xms2g -XX:+UseG1GC -verbose:gc -XX:+PrintGCDateStamps -XX:+PrintGCD
 尝试使用课程中介绍的各种工具JDK命令行和图形工具来进行分析。
 
 其中 [GCLogAnalysis.java](./GCLogAnalysis.java) 文件也可以从课件资料zip中找到.
+
+## 几个命令用法
+### 1、十六进制方式查看文件
+`hexdump -C Hello.class` 
+输出：`00000000  ca fe ba be 00 00 00 34  00 1c 0a 00 06 00 0e 09`
+
+可以看到magic number： `cafe babe`，
+以及`00 00 00 34`，十六进制34=十进制3*16+4=52，这是jdk8，如果是jdk11则是55，十六进制37.
+
+### 2、Base64方式编码文件
+`base64 Hello.class`
+### 3、显示JVM默认参数
+```
+java -XX:+PrintFlagsFinal -version 
+
+java -XX:+PrintFlagsFinal -version | grep -F " Use" | grep -F "GC "
+
+java -XX:+PrintFlagsFinal -version | grep MaxNewSize
+
+```
+
+### 4、切换不同jdk
+```
+jenv shell 1.8
+jenv shell 11
+```
+显示所有jdk
+```
+jenv versions
+```
 
 ## 更多资料
 
